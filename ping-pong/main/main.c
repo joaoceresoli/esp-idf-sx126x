@@ -138,7 +138,7 @@ void app_main()
 	LoRaInit();
 	//int ret = LoRaBegin(915000000, 22, 0.0, false);
 	int8_t txPowerInDbm = 22;
-	float tcxoVoltage = 0.0;  // don't use TCXO
+	float tcxoVoltage = 3.3;  // don't use TCXO
 	bool useRegulatorLDO = false;  // use only LDO in all modes
 	int ret = LoRaBegin(frequencyInHz, txPowerInDbm, tcxoVoltage, useRegulatorLDO);
 	ESP_LOGI(TAG, "LoRaBegin=%d", ret);
@@ -163,7 +163,7 @@ void app_main()
 #endif
 	LoRaConfig(spreadingFactor, bandwidth, codingRate, preambleLength, payloadLen, crcOn, invertIrq);
 
-	//LoRaDebugPrint(true);
+	LoRaDebugPrint(true);
 
 #if CONFIG_PRIMARY
 	xTaskCreate(&task_primary, "task_primary", 1024*4, NULL, 5, NULL);
